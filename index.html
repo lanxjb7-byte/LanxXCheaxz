@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>𓆩 LanxXCheax 𓆪</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Orbitron',sans-serif;
+-webkit-tap-highlight-color: transparent;
+outline:none;
+}
+
+body{
+background:#050505;
+color:white;
+overflow-x:hidden;
+}
+
+/* TITLE */
+.title{
+color:#ffffff;
+text-shadow:
+0 0 10px #ff0000,
+0 0 20px #0011ff;
+}
+
+/* PRICE */
+.price{
+background:black;
+color:#ffffff;
+border:2px solid #0011ff;
+box-shadow:
+0 0 15px #ff0000,
+0 0 25px #0011ff;
+}
+
+/* BUTTON */
+.btn{
+border:2px solid #0011ff;
+background:black;
+color:#ffffff;
+box-shadow:0 0 15px #0011ff;
+transition:0.3s;
+}
+
+.btn:hover{
+background:#0011ff;
+color:white;
+box-shadow:
+0 0 20px #0011ff,
+0 0 35px #ff0000;
+}
+
+/* LOADING */
+#loading{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100vh;
+background:black;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+z-index:99999;
+}
+
+.loader{
+width:120px;
+height:120px;
+border:6px solid #2b0000;
+border-top:6px solid #ff0000;
+border-radius:50%;
+animation:spin 1s linear infinite;
+box-shadow:0 0 30px #ff0000;
+}
+
+.loading-text{
+margin-top:20px;
+font-size:25px;
+color:#ff0000;
+text-shadow:0 0 20px #ff0000;
+}
+
+@keyframes spin{
+100%{transform:rotate(360deg);}
+}
+
+#content{
+display:none;
+padding:20px;
+}
+
+/* NAVBAR */
+.navbar{
+padding:20px;
+border:2px solid #ff0000;
+border-radius:15px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+box-shadow:0 0 20px #ff0000;
+margin-bottom:25px;
+position:relative;
+background:#0d0000;
+}
+
+.logo{
+font-size:35px;
+color:#ff0000;
+text-shadow:0 0 20px #ff0000;
+font-weight:bold;
+}
+
+.menu{
+font-size:35px;
+color:#ff0000;
+cursor:pointer;
+}
+
+/* DROPDOWN */
+.dropdown{
+display:none;
+position:absolute;
+top:90px;
+right:0;
+background:#120000;
+border:2px solid #ff0000;
+border-radius:15px;
+padding:15px;
+box-shadow:0 0 20px #ff0000;
+z-index:999;
+}
+
+.dropdown a{
+color:#ff0000;
+text-decoration:none;
+font-size:18px;
+}
+
+/* CARD */
+.card{
+position:relative;
+background:#050505;
+border-radius:35px;
+padding:25px;
+margin-bottom:35px;
+overflow:hidden;
+z-index:1;
+}
+
+/* EFEK AIR BERGELOMBANG */
+.card::before{
+content:"";
+position:absolute;
+inset:-8px;
+border-radius:40px;
+padding:4px;
+background:linear-gradient(
+45deg,
+#ff0000,
+#0011ff,
+#ff0000,
+#0011ff
+);
+
+background-size:400% 400%;
+animation:
+gelombang 6s ease infinite,
+air 3s ease-in-out infinite;
+
+filter:blur(3px);
+z-index:-2;
+}
+
+/* DALAM CARD */
+.card::after{
+content:"";
+position:absolute;
+inset:4px;
+background:#0a0a0a;
+border-radius:32px;
+z-index:-1;
+}
+
+/* WARNA BERGERAK */
+@keyframes gelombang{
+0%{
+background-position:0% 50%;
+}
+
+50%{
+background-position:100% 50%;
+}
+
+100%{
+background-position:0% 50%;
+}
+}
+
+/* GELOMBANG AIR */
+@keyframes air{
+0%{
+transform:scale(1) rotate(0deg);
+border-radius:35px;
+}
+
+25%{
+transform:scale(1.02) rotate(1deg);
+border-radius:45px;
+}
+
+50%{
+transform:scale(1.03) rotate(-1deg);
+border-radius:55px;
+}
+
+75%{
+transform:scale(1.02) rotate(1deg);
+border-radius:45px;
+}
+
+100%{
+transform:scale(1) rotate(0deg);
+border-radius:35px;
+}
+}
+
+.tag{
+position:absolute;
+top:0;
+right:0;
+background:#ff0000;
+color:white;
+padding:10px 20px;
+border-radius:0 30px 0 20px;
+font-size:18px;
+font-weight:bold;
+}
+
+.image-box{
+width:100%;
+height:140px;
+background:#1a0000;
+border-radius:20px;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:70px;
+color:#ff0000;
+margin-bottom:30px;
+box-shadow:0 0 20px #ff0000 inset;
+}
+
+.title{
+text-align:center;
+font-size:38px;
+color:#ff4d4d;
+text-shadow:0 0 20px #ff0000;
+margin-bottom:30px;
+}
+
+.price{
+background:black;
+padding:20px;
+border-radius:15px;
+text-align:center;
+font-size:55px;
+color:#ff0000;
+margin-bottom:20px;
+text-shadow:0 0 20px #ff0000;
+border:1px solid #ff0000;
+}
+
+.desc{
+text-align:center;
+font-size:14px;
+color:#ddd;
+margin-bottom:30px;
+}
+
+.btn{
+width:100%;
+padding:22px;
+border:2px solid #ff0000;
+border-radius:20px;
+background:transparent;
+color:#ff0000;
+font-size:28px;
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
+}
+
+.btn:hover{
+background:#ff0000;
+color:black;
+box-shadow:0 0 25px #ff0000;
+}
+
+/* FITUR */
+.fitur{
+margin-top:50px;
+padding:30px;
+border:2px solid #ff0000;
+border-radius:25px;
+box-shadow:0 0 20px #ff0000;
+background:#100000;
+}
+
+.fitur h1{
+text-align:center;
+font-size:35px;
+margin-bottom:30px;
+color:#ff0000;
+text-shadow:0 0 15px #ff0000;
+}
+
+.fitur-box{
+background:black;
+padding:18px;
+margin-bottom:15px;
+border-radius:15px;
+border:1px solid #ff0000;
+font-size:18px;
+}
+
+/* POPUP */
+.popup{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100vh;
+background:rgba(0,0,0,0.85);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:9999;
+padding:20px;
+}
+
+.popup-box{
+width:100%;
+max-width:500px;
+background:#120000;
+border:2px solid #ff0000;
+border-radius:25px;
+padding:25px;
+box-shadow:0 0 30px #ff0000;
+}
+
+.popup-box h1{
+color:#ff0000;
+font-size:38px;
+margin-bottom:10px;
+}
+
+.popup-box h2{
+color:#ff6666;
+font-size:30px;
+margin-bottom:25px;
+}
+
+.popup-box input{
+width:100%;
+padding:18px;
+border-radius:15px;
+border:2px solid #ff0000;
+background:transparent;
+color:white;
+font-size:18px;
+margin-bottom:10px;
+}
+
+.popup-box button{
+width:100%;
+padding:18px;
+border:none;
+border-radius:18px;
+background:linear-gradient(90deg,#700000,#ff0000);
+color:white;
+font-size:20px;
+font-weight:bold;
+margin-top:20px;
+cursor:pointer;
+box-shadow:0 0 20px #ff0000;
+}
+
+.popup-box p{
+margin-top:15px;
+text-align:center;
+cursor:pointer;
+color:#ff4d4d;
+}
+
+#notif{
+color:#ff4d4d;
+font-size:15px;
+height:20px;
+}
+
+.pay-text{
+margin:25px 0;
+line-height:30px;
+font-size:18px;
+}
+
+.qris{
+width:100%;
+border-radius:20px;
+border:3px solid #ff0000;
+margin-top:20px;
+box-shadow:0 0 20px #ff0000;
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOADING -->
+<div id="loading">
+<div class="loader"></div>
+<div class="loading-text">MEMUAT HALAMAN......</div>
+</div>
+
+<div id="content">
+
+<!-- NAVBAR -->
+<div class="navbar">
+<div class="logo">𓆩 LanxXCheax 𓆪</div>
+<div class="menu" onclick="toggleMenu()">☰</div>
+
+<div class="dropdown" id="dropdownMenu">
+<a href="https://whatsapp.com/channel/0029Vb7IVBjCHDyuEJHRim1y">SALURAN LANX</a>
+</div>
+</div>
+
+<!-- ITEMS -->
+<div class="card">
+<div class="tag">ANDROID</div>
+<div class="image-box">𓆩</div>
+<div class="title">EASY HEAD 25%</div>
+<div class="price">Rp 7K</div>
+<div class="desc">AIM GAMPANG KEKEPALA 25%</div>
+<button class="btn" onclick="openPopup('EASY HEAD 25%','Rp 7K')">BELI SEKARANG</button>
+</div>
+
+<div class="card">
+<div class="tag">ANDROID</div>
+<div class="image-box">𓆩</div>
+<div class="title">EASY HEAD 30%</div>
+<div class="price">Rp 13K</div>
+<div class="desc">AIM GAMPANG KEKEPALA 30%</div>
+<button class="btn" onclick="openPopup('EASY HEAD 30%','Rp 13K')">BELI SEKARANG</button>
+</div>
+
+<div class="card">
+<div class="tag">ANDROID</div>
+<div class="image-box">𓆩</div>
+<div class="title">EASY HEAD 50%</div>
+<div class="price">Rp 27K</div>
+<div class="desc">AIM GAMPANG KEKEPALA 50%</div>
+<button class="btn" onclick="openPopup('EASY HEAD 50%','Rp 27K')">BELI SEKARANG</button>
+</div>
+
+<div class="card">
+<div class="tag">ANDROID</div>
+<div class="image-box">𓆩</div>
+<div class="title">EASY HEAD 70%</div>
+<div class="price">Rp 39K</div>
+<div class="desc">AIM GAMPANG KEKEPALA 70%</div>
+<button class="btn" onclick="openPopup('EASY HEAD 70%','Rp 39K')">BELI SEKARANG</button>
+</div>
+
+<div class="card">
+<div class="tag">ANDROID</div>
+<div class="image-box">𓆩</div>
+<div class="title">EASY HEAD 97%</div>
+<div class="price">Rp 45K</div>
+<div class="desc">AIM GAMPANG KEKEPALA 97% HS</div>
+<button class="btn" onclick="openPopup('EASY HEAD 97%','Rp 45K')">BELI SEKARANG</button>
+</div>
+
+<div class="card">
+<div class="tag">ANDROID</div>
+<div class="image-box">𓆪</div>
+<div class="title">XNIX SHOX V1</div>
+<div class="price">Rp 5K</div>
+<div class="desc">DRAG SMOTH+ | FPS HIGH+ | SENSITIFITY+ | DRAG TO HEAD 30%</div>
+<button class="btn" onclick="openPopup('XNIX SHOX V1','Rp 5K')">BELI SEKARANG</button>
+</div>
+
+<div class="card">
+<div class="tag">ANDROID</div>
+<div class="image-box">𓆪</div>
+<div class="title">XNIX SHOX V2</div>
+<div class="price">Rp 10K</div>
+<div class="desc">DRAG HS | FPS HIGH++ | SENSITIFITY++ |DRAG TO HEAD 40%</div>
+<button class="btn" onclick="openPopup('XNIX SHOX V2','Rp 10K')">BELI SEKARANG</button>
+</div>
+
+<div class="card">
+<div class="tag">ANDROID</div>
+<div class="image-box">𓆪</div>
+<div class="title">XNIX SHOX V3</div>
+<div class="price">Rp 20K</div>
+<div class="desc">FPS HIGH+++ | SENSITIFITY+++ | DRAG TO HEAD 50% | SMOTH FPS | DRAG SMOTH</div>
+<button class="btn" onclick="openPopup('XNIX SHOX V3','Rp 20K')">BELI SEKARANG</button>
+</div>
+
+<div class="card">
+<div class="tag">ANDROID</div>
+<div class="image-box">𓆪</div>
+<div class="title">XNIX SHOX V4</div>
+<div class="price">Rp 30K</div>
+<div class="desc">FPS ULTRA++ | SENSITIFITY ULTRA++ | DRAG TO HEAD 70% | FIX LAG GAME PLAY</div>
+<button class="btn" onclick="openPopup('XNIX SHOX V4','Rp 30K')">BELI SEKARANG</button>
+</div>
+
+<div class="card">
+<div class="tag">ANDROID</div>
+<div class="image-box">𓆪</div>
+<div class="title">XNIX SHOX V5</div>
+<div class="price">Rp 40K</div>
+<div class="desc">FPS ULTRA++++ | FIX LAG GAME PLAY | DRAG TO HEAD 90% | SENSITIFITY ULTRA++++</div>
+<button class="btn" onclick="openPopup('XNIX SHOX V5','Rp 40K')">BELI SEKARANG</button>
+</div>
+
+<!-- FITUR -->
+<div class="fitur">
+<h1>KEAMANAN</h1>
+<div class="fitur-box">✓ AMAN 100%</div>
+<div class="fitur-box">✓ ANTI BENNED</div>
+<div class="fitur-box">✓ ANTI BLACKLIST</div>
+<div class="fitur-box">✓ ANTI SURCIN</div>
+</div>
+
+</div>
+
+<!-- POPUP -->
+<div class="popup" id="popup">
+<div class="popup-box">
+<h1 id="judul"></h1>
+<h2 id="harga"></h2>
+
+<input type="text" id="nickname" placeholder="Masukkan nickname / ID">
+<div id="notif"></div>
+
+<button onclick="lanjutBayar()">LANJUT PEMBAYARAN →</button>
+<p onclick="closePopup()">X BATAL</p>
+</div>
+</div>
+
+<!-- PAYMENT -->
+<div class="popup" id="paymentPopup">
+<div class="popup-box">
+
+<h1 id="judulBayar"></h1>
+<h2 id="hargaBayar"></h2>
+
+<div class="pay-text">
+<p>QRIS</p>
+</div>
+
+<img src="qris.png" class="qris">
+
+<button onclick="window.location.href='https://wa.me/6282155521748?text=SAYA+SUDAH+BAYAR+INI+BUKTI+NYA'">
+SEND BUKTI KE LANX
+</button>
+
+<p onclick="closePayment()">X TUTUP</p>
+
+</div>
+</div>
+
+<script>
+
+setTimeout(()=>{
+document.getElementById("loading").style.display="none";
+document.getElementById("content").style.display="block";
+},3000);
+
+let produk="";
+let harga="";
+
+function toggleMenu(){
+let menu=document.getElementById("dropdownMenu");
+menu.style.display = menu.style.display==="block"?"none":"block";
+}
+
+function openPopup(n,h){
+produk=n;
+harga=h;
+document.getElementById("judul").innerText=n;
+document.getElementById("harga").innerText=h;
+document.getElementById("popup").style.display="flex";
+}
+
+function closePopup(){
+document.getElementById("popup").style.display="none";
+}
+
+function lanjutBayar(){
+let nick=document.getElementById("nickname").value;
+if(nick.trim()==""){
+document.getElementById("notif").innerText="Nickname / ID wajib di isi!";
+return;
+}
+document.getElementById("popup").style.display="none";
+document.getElementById("judulBayar").innerText=produk;
+document.getElementById("hargaBayar").innerText=harga;
+document.getElementById("paymentPopup").style.display="flex";
+}
+
+function closePayment(){
+document.getElementById("paymentPopup").style.display="none";
+}
+
+</script>
+
+</body>
+</html>
